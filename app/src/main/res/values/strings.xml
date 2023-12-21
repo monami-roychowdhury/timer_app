@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">CountDownTimerApp</string>
+    <string name="header">Counting down from 1 minute</string>
+    <string name="pause">Pause</string>
+    <string name="start">Start</string>
+    <string name="stop">Stop</string>
+    <string name="countdown_ended">CountDown Ended</string>
+    <string name="min_up">1 Minute is up!</string>
+</resources>
