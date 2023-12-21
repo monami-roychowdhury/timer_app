@@ -56,7 +56,6 @@ dependencies {
     implementation("androidx.compose.ui:ui-graphics")
     implementation("androidx.compose.ui:ui-tooling-preview")
     implementation("androidx.compose.material3:material3")
-  //  implementation ("io.insert-koin:koin-androidx-compose:3.5.0")
     implementation ("io.insert-koin:koin-android:3.5.3")
     implementation ("io.insert-koin:koin-core:3.5.3")
     implementation ("androidx.work:work-runtime-ktx:2.9.0")
