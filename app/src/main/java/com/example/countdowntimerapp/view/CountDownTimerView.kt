@@ -26,9 +26,13 @@ import com.example.countdowntimerapp.viewmodel.TimerViewModel
 
 @Composable
 fun CountDownTimerView(modifier: Modifier = Modifier, timerViewModel: TimerViewModel) {
+    // Observing current time state
     val currentTime = timerViewModel.time.collectAsState().value
+    // Observing timer running state
     val isTimerRunning = timerViewModel.isTimerRunning.collectAsState().value
+    // Observing timer paused state
     val isTimerPaused = timerViewModel.isTimerPaused.collectAsState().value
+    // Observing timer progress state
     val progress = timerViewModel.progress.collectAsState().value
 
     val density = LocalDensity.current
@@ -70,6 +74,7 @@ fun CountDownTimerView(modifier: Modifier = Modifier, timerViewModel: TimerViewM
                 stringResource(id = R.string.start)
             }
             Button(onClick = {
+                // Check if timer is running/paused
                 if (isTimerRunning) {
                     timerViewModel.pauseTimer()
                 } else if (isTimerPaused) {

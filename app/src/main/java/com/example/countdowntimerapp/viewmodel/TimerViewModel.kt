@@ -63,6 +63,7 @@ class TimerViewModel(private val workManager: WorkManager) : ViewModel(), Defaul
         _progress.value = 0f
     }
 
+    /** Creates a countdown timer object */
     private fun createTimer(millisInFuture: Long) {
         countDownTimer = object : CountDownTimer(millisInFuture, TIME_COUNTDOWN_INTERVAL) {
             override fun onTick(millisUntilFinished: Long) {
@@ -73,11 +74,13 @@ class TimerViewModel(private val workManager: WorkManager) : ViewModel(), Defaul
             }
 
             override fun onFinish() {
+                // Timer has ended
                 countDownTimer?.cancel()
                 _isTimerRunning.value = false
                 _isTimerPaused.value = false
                 _time.value = TIME_COUNTDOWN_END
                 _progress.value = 0f
+                // Show notification only if app is in the background
                 if (isAppInBackground) {
                     showNotification()
                 }
@@ -87,17 +90,20 @@ class TimerViewModel(private val workManager: WorkManager) : ViewModel(), Defaul
         }.start()
     }
 
+    /** overridden onPause() function for checking if app is in the background/foreground  */
     override fun onPause(owner: LifecycleOwner) {
         super.onPause(owner)
         isAppInBackground = true
     }
 
+    /** overridden onResume() function for checking if app is in the background/foreground  */
     override fun onResume(owner: LifecycleOwner) {
         super.onResume(owner)
         isAppInBackground = false
     }
 
 
+    /** Creates a work request and assigns to WorkManager queue */
     private fun showNotification() {
         val workRequest = OneTimeWorkRequestBuilder<NotificationWorker>().build()
         workManager.enqueue(workRequest)
