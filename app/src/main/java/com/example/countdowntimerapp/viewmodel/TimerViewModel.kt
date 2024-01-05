@@ -109,4 +109,10 @@ class TimerViewModel(private val workManager: WorkManager) : ViewModel(), Defaul
         workManager.enqueue(workRequest)
 
     }
+
+    override fun onCleared() {
+        super.onCleared()
+        countDownTimer?.cancel()
+        countDownTimer = null
+    }
 }
